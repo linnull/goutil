@@ -3,7 +3,9 @@ package goutil
 import (
 	"encoding/json"
 	"io/ioutil"
+	"math/rand"
 	"os"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -74,4 +76,14 @@ func GetHyperlinks(url string) ([]string, error) {
 	}
 	return links, nil
 
+}
+
+//获得一个范围(-n~n)的整型随机数组
+func RandIntArray(num, n int) []int {
+	array := make([]int, num)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < num; i++ {
+		array[i] = r.Intn(2*n) - n
+	}
+	return array
 }
